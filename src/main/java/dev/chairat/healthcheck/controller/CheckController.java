@@ -1,6 +1,7 @@
 package dev.chairat.healthcheck.controller;
 
 import dev.chairat.healthcheck.model.HealthcheckResult;
+import dev.chairat.healthcheck.service.HealthcheckService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +18,7 @@ public class CheckController {
         return ResponseEntity.ok( HealthcheckResult.builder()
                 .id("test")
                 .url(url)
-                .status(HttpStatus.OK)
-                .result(true)
+                .result(new HealthcheckService().check(url))
                 .build());
     }
 

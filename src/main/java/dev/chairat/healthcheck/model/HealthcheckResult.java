@@ -14,7 +14,6 @@ public class HealthcheckResult {
 
     private String id;
     private String url;
-    private HttpStatus status;
     private boolean result;
 
 }
