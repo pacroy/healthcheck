@@ -1,5 +1,6 @@
 package dev.chairat.healthcheck.controller;
 
+import dev.chairat.healthcheck.model.HealthcheckResult;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class CheckControllerTest {
     @Test
     public void should_always_return_200() {
         // When
-        ResponseEntity<String> responseEntity = checkController.check();
+        ResponseEntity<HealthcheckResult> responseEntity = checkController.check();
 
         // Then
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
