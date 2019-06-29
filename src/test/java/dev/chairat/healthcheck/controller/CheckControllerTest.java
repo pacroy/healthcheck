@@ -12,15 +12,15 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RootControllerTest {
+public class CheckControllerTest {
 
     @Autowired
-    RootController rootController;
+    CheckController checkController;
 
     @Test
     public void should_always_return_200() {
         // When
-        ResponseEntity<String> responseEntity = rootController.hello();
+        ResponseEntity<String> responseEntity = checkController.check();
 
         // Then
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
