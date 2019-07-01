@@ -15,5 +15,6 @@ public class HealthcheckResult {
     private String id;
     private String url;
     private boolean result;
+    private String message;
 
 }
