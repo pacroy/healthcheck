@@ -1,2 +1,14 @@
 server:
   port: 8081
+healthchecks:
+  - title: Test Check
+    url: http://localhost:8080/v2/actuator/health
+    job_frequency: 10min
+    alert_frequency: 1h
+    checks:
+      - path: status
+        value: 200
+      - path: json.xxx.yyy
+        value: UP
+      - path: json.xxx.zzz
+        value: ACTIVE
