@@ -6,9 +6,11 @@ healthchecks:
     job_frequency: 10min
     alert_frequency: 1h
     checks:
-      - path: status
+      - type: status
         value: 200
-      - path: json.xxx.yyy
-        value: UP
-      - path: json.xxx.zzz
-        value: ACTIVE
+      - type: json
+        path: details.JCoConnection.details.AMB_SERVER.state
+        value: ALIVE
+      - type: json
+        path: details.kafkaTopicConnection.details.customer-env.state
+        value: active
