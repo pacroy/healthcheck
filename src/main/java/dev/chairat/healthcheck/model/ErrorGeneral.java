@@ -16,6 +16,8 @@ public class ErrorGeneral {
 
     private String type;
     private String description;
+
+    @Builder.Default
     private List<ErrorDetail> errorDetails = new ArrayList<>();
 
 }
