@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 @ConfigurationProperties
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 public class CheckConfig {
 
     @NestedConfigurationProperty
@@ -19,5 +19,7 @@ public class CheckConfig {
 
     @NestedConfigurationProperty
     private String value;
+
+    private Boolean result;
 
 }

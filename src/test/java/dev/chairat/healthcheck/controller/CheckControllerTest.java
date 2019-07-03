@@ -1,8 +1,8 @@
 package dev.chairat.healthcheck.controller;
 
+import dev.chairat.healthcheck.config.CheckConfig;
 import dev.chairat.healthcheck.config.HealthcheckConfig;
 import dev.chairat.healthcheck.config.HealthcheckConfigurationProperties;
-import dev.chairat.healthcheck.model.HealthcheckResult;
 import dev.chairat.healthcheck.service.HealthcheckService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,14 +35,27 @@ public class CheckControllerTest {
     @Test
     public void should_always_return_200() {
         // Given
-        when(healthcheckService.check("http://localhost:8080/v2/actuator/health")).thenReturn(true);
+        HealthcheckConfig healthcheckConfig = HealthcheckConfig.builder()
+                .title("test")
+                .url("http://localhost:8080/actuator/health")
+                .build();
+        healthcheckConfig.getChecks().add(CheckConfig.builder()
+                .path("status")
+                .value("200")
+                .build());
+
+        HealthcheckConfig healthcheckConfigToReturn = healthcheckConfig.toBuilder()
+                .result(true)
+                .build();
+
+        when(healthcheckService.check(healthcheckConfig)).thenReturn(healthcheckConfigToReturn);
 
         List<HealthcheckConfig> healthcheckConfigs = new ArrayList<>();
-        healthcheckConfigs.add(HealthcheckConfig.builder().title("Test").build());
+        healthcheckConfigs.add(healthcheckConfig);
         when(healthcheckConfigProperties.getHealthchecks()).thenReturn(healthcheckConfigs);
 
         // When
-        ResponseEntity<HealthcheckResult> responseEntity = checkController.check();
+        ResponseEntity<HealthcheckConfigurationProperties> responseEntity = checkController.check();
 
         // Then
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());

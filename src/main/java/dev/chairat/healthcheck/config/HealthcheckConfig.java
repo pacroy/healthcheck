@@ -1,5 +1,6 @@
 package dev.chairat.healthcheck.config;
 
+import dev.chairat.healthcheck.model.ErrorGeneral;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +15,7 @@ import java.util.List;
 @ConfigurationProperties
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 public class HealthcheckConfig {
 
     @NestedConfigurationProperty
@@ -30,6 +31,12 @@ public class HealthcheckConfig {
     private String alert_frequency;
 
     @NestedConfigurationProperty
+    @Builder.Default
     private List<CheckConfig> checks = new ArrayList<>();
+
+    private Boolean result;
+
+    @Builder.Default
+    private List<ErrorGeneral> errors = new ArrayList<>();
 
 }
